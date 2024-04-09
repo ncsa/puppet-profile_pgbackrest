@@ -1,0 +1,10 @@
+<% |     String $stanza_name,
+         String $postgresql_data,
+         String $backup_path
+| -%>
+[global]
+repo1-path=<%= $backup_path %>
+repo1-retention-full=2
+
+[<%= $stanza_name %>]
+pg1-path=<%= $postgresql_data %>
