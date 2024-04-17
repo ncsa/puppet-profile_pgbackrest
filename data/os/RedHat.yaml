@@ -1,0 +1,4 @@
+---
+profile_pgbackrest::postgresql_yum_repo: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-%{releasever}-%{basearch}/pgdg-redhat-repo-latest.noarch.rpm"
+#profile_pgbackrest::epel_libzstd: 'https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.5-1.el7.x86_64.rpm'
+#profile_pgbackrest::epel: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'

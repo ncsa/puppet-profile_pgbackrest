@@ -4,40 +4,23 @@
 #
 # @example
 #   include profile_pgbackrest
-class profile_pgbackrest {
-  $param = {
-    'stanza_name' => lookup('profile_pgbackrest::stanza_name'),
-    'postgresql_data' => lookup('profile_pgbackrest::postgresql_data'),
-    'backup_path'  => lookup('profile_pgbackrest::backup_path')
+class profile_pgbackrest (
+  # PARAMETERS
+  String $stanza_name,
+  String $postgresql_data,
+  String $backup_path,
+  # Maybe include like a list that user can use to customize their stanza
+) {
+
+# SUB-MODULES TO INCLUDE 
+include ::epel
+
+  case $::facts['os']['family'] {
+    "RedHat": {
+      ensure_resource('yumrepo', ['pgdg-redhat-repo'], {baseurl => lookup('postgresql_yum_repo})
+    }
   }
-
-  # @TODO: instead of using case statement, let the hiera lookup do it 
-  # There is a yum resource instead of package 
-  #case $::facts['os']['family'] {
-  #  "RedHat": {
-  #
-  #   package { 'pgdg-redhat-repo':
-  #      source => "https://download.postgresql.org/pub/repos/yum/reporpms/EL-${::facts['operatingsystemmajrelease']}-${::facts['architecture']}/pgdg-redhat-repo-latest.noarch.rpm"
-  #    }
-
-  #    package { 'libzstd':
-  #      source   => lookup('pgbackrest::epel_libzstd')
-  #    }
-  #  }
-  #}
   
-  # ensure_resource('yumrepo', ['pgdg-redhat-repo','epel'], $defaults)
-  yumrepo { 'pgdg-redhat-repo':
-    name => 'PostgreSQL Yum Repository',
-    baseurl => "https://download.postgresql.org/pub/repos/yum/reporpms/EL-${::facts['operatingsystemmajrelease']}-${::facts['architecture']}/pgdg-redhat-repo-latest.noarch.rpm"
-  }
-
-  yumrepo { 'epel':
-    name => 'epel library',
-    baseurl => lookup('profile_pgbackrest::epel') 
-  }
-
-
   # default for ensure is installed
   package { 'pgbackrest':}
 
