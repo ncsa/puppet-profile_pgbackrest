@@ -1,9 +1,6 @@
---- 
+---
 profile_pgbackrest::stanza_name: 'demo'
 profile_pgbackrest::postgresql_data: '/var/lib/pgsql/15/data'
 
 # The repository where pgBackrest stores backups and archives WAL segments
 profile_pgbackrest::backup_path: '/var/lib/pgbackrest'
-
-# Specific to CentOS7
-#profile_pgbackrest::epel_libzstd: 'https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.5-1.el7.x86_64.rpm'

@@ -11,18 +11,17 @@ class profile_pgbackrest (
   String $backup_path,
   # Maybe include like a list that user can use to customize their stanza
 ) {
-
 # SUB-MODULES TO INCLUDE 
-include ::epel
+  include epel
 
   case $::facts['os']['family'] {
-    "RedHat": {
-      ensure_resource('yumrepo', ['pgdg-redhat-repo'], {baseurl => lookup('postgresql_yum_repo})
+    'RedHat': {
+      ensure_resource('yumrepo', ['pgdg-redhat-repo'], { baseurl => lookup('postgresql_yum_repo') })
     }
   }
-  
+
   # default for ensure is installed
-  package { 'pgbackrest':}
+  package { 'pgbackrest': }
 
   # Adds the stanza to pgbackrest_config.epp
   file { '/etc/pgbackrest.conf':
