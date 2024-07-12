@@ -14,6 +14,12 @@ class profile_pgbackrest (
 # SUB-MODULES TO INCLUDE 
   include epel
 
+  $param= {
+    'stanza_name' => $stanza_name,
+    'postgresql_data' => $postgresql_data,
+    'backup_path' => $backup_path,
+  }
+
   file { '~/hello.txt':
     ensure  => 'file',
     content => "Welcome to my server!\n",
