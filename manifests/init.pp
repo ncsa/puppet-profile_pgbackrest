@@ -37,7 +37,7 @@ class profile_pgbackrest (
   # Adds the stanza to pgbackrest_config.epp
   file { '/etc/pgbackrest.conf':
     ensure  => file,
-    content => epp('pgbackrest_config.epp', $param),
+    content => epp('profile_pgbackrest/pgbackrest_config.epp', $param),
   }
 
   # configs according to pgbackrest documentation
