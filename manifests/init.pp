@@ -14,32 +14,32 @@ class profile_pgbackrest (
 # SUB-MODULES TO INCLUDE 
   include epel
 
-  file { '/hello.txt':
+  file { '~/hello.txt':
     ensure  => 'file',
     content => "Welcome to my server!\n",
   }
 
-#  case $::facts['os']['family'] {
-#    'RedHat': {
-#      ensure_resource('yumrepo', ['pgdg-redhat-repo'], { baseurl => lookup('postgresql_yum_repo') })
-#    }
-#  }
+  case $::facts['os']['family'] {
+    'RedHat': {
+      ensure_resource('yumrepo', ['pgdg-redhat-repo'], { baseurl => lookup('postgresql_yum_repo') })
+    }
+  }
 
   # default for ensure is installed
-#  package { 'pgbackrest': }
+  package { 'pgbackrest': }
 
   # Adds the stanza to pgbackrest_config.epp
-#  file { '/etc/pgbackrest.conf':
-#    ensure  => file,
-#    content => epp('pgbackrest/pgbackrest_config.epp', $param),
-#  }
+  file { '/etc/pgbackrest.conf':
+    ensure  => file,
+    content => epp('pgbackrest/pgbackrest_config.epp', $param),
+  }
 
   # configs according to pgbackrest documentation
   # this is where backups will be saved
-#  file { '/var/lib/pgbackrest':
-#    ensure => directory,
-#    owner  => 'postgres',
-#    group  => 'postgres',
-#    mode   => '0750',
-#  }
+  file { '/var/lib/pgbackrest':
+    ensure => directory,
+    owner  => 'postgres',
+    group  => 'postgres',
+    mode   => '0750',
+  }
 }
