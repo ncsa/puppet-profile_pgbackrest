@@ -4,3 +4,5 @@ profile_pgbackrest::postgresql_data: "/var/lib/pgsql/15/data"
 
 # The repository where pgBackrest stores backups and archives WAL segments
 profile_pgbackrest::backup_path: "/var/lib/pgbackrest"
+profile_pgbackrest::postgresql_yum_repo: "https://download.postgresql.org/pub/
+  repos/yum/reporpms/EL-%{releasever}-%{basearch}/pgdg-redhat-repo-latest.noarch.rpm"
