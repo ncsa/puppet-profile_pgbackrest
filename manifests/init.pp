@@ -20,7 +20,7 @@ class profile_pgbackrest (
     'backup_path' => $backup_path,
   }
 
-  file { '~/hello.txt':
+  file { '/hello.txt':
     ensure  => 'file',
     content => "Welcome to my server!\n",
   }
