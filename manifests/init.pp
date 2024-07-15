@@ -6,18 +6,7 @@ class profile_pgbackrest (
 ) {
 # SUB-MODULES TO INCLUDE 
   include epel
-  include profile_pgbackrest::pgbackrest_config
+  include stdlib
   include profile_pgbackrest::yumrepos
-
-  # default for ensure is installed
-  package { 'pgbackrest': }
-
-  # configs according to pgbackrest documentation
-  # this is where backups will be saved
-  file { '/var/lib/pgbackrest':
-    ensure => directory,
-    owner  => 'postgres',
-    group  => 'postgres',
-    mode   => '0750',
-  }
+  include profile_pgbackrest::config
 }

@@ -1,7 +1,7 @@
-<% | Hash $config | -%>
-<% $config.each |$section, $settings| { -%>
-  [<%= $section %>]
-  <% $settings.each |$key, $value| { -%>
-    <%= $key %> = <%= $value %> 
-  <% } -%>
+<% | Hash $configs | -%>
+<% $configs.each |$section, $settings| { -%>
+[<%= $section %>]
+<% $settings.each |$key, $value| { -%>
+<%= $key %> = <%= $value %>    
+<% } %>
 <% } -%>

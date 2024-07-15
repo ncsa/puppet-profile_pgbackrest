@@ -3,10 +3,19 @@
 profile_pgbackrest::postgresql_data: "/var/lib/pgsql/15/data"
 # The repository where pgBackrest stores backups and archives WAL segments
 profile_pgbackrest::backup_path: "/var/lib/pgbackrest"
+profile_pgbackrest::yumrepo_url: "https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-%{facts.os.distro.release.full}-%{facts.os.architecture}/"
+profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/RPM-GPG-KEY-PGDG-AARCH64-RHEL%{facts.os.distro.release.major}"
 
-profile_pgbackrest::pgbackrest_config::config:
+profile_pgbackrest::config::configs:
   demo:
     pg1-path: "/var/lib/pgsql/12/data"
   global:
     repo1-path: "/var/lib/pgbackrest"
     repo1-retention-full: 2
+
+profile_pgbackrest::postgresql_config:
+  archive_command: "pgbackrest --stanza=demo archive-push %p"
+  archive_mode: on
+  log_filename: "postgresql.log"
+  max_wal_senders: 3
+  wal_level: replica
