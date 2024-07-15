@@ -1,44 +1,16 @@
-# @summary A short summary of the purpose of this class
-#
-# A description of what this class does
-#
-# @example
 #   include profile_pgbackrest
 class profile_pgbackrest (
   # PARAMETERS
-  String $stanza_name,
   String $postgresql_data,
   String $backup_path,
-  # Maybe include like a list that user can use to customize their stanza
 ) {
 # SUB-MODULES TO INCLUDE 
   include epel
-
-  $param= {
-    'stanza_name' => $stanza_name,
-    'postgresql_data' => $postgresql_data,
-    'backup_path' => $backup_path,
-  }
-
-  file { '/hello.txt':
-    ensure  => 'file',
-    content => "Welcome to my server!\n",
-  }
-
-  case $::facts['os']['family'] {
-    'RedHat': {
-      ensure_resource('yumrepo', ['pgdg-redhat-repo'], { baseurl => lookup('postgresql_yum_repo') })
-    }
-  }
+  include profile_pgbackrest::pgbackrest_config
+  include profile_pgbackrest::yumrepos
 
   # default for ensure is installed
   package { 'pgbackrest': }
-
-  # Adds the stanza to pgbackrest_config.epp
-  file { '/etc/pgbackrest.conf':
-    ensure  => file,
-    content => epp('profile_pgbackrest/pgbackrest_config.epp', $param),
-  }
 
   # configs according to pgbackrest documentation
   # this is where backups will be saved
