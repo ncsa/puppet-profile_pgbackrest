@@ -5,9 +5,9 @@ class profile_pgbackrest::yumrepos () {
       yumrepo { 'postgres':
         descr         => 'postgres',
         baseurl       => lookup('profile_pgbackrest::yumrepo_url'),
-        gpgcheck      => false,
+        gpgcheck      => true,
         gpgkey        => lookup('profile_pgbackrest::yumrepo_gpgkey'),
-        repo_gpgcheck => false,
+        repo_gpgcheck => true,
       }
     }
   }
