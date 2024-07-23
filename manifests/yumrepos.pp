@@ -2,9 +2,17 @@ class profile_pgbackrest::yumrepos () {
   case $::facts['os']['family'] {
     'RedHat': {
       # ensure_resource('yumrepo', ['pgdg-redhat-repo'], { baseurl => $yum_repo })
-      yumrepo { 'postgres':
-        descr         => 'postgres',
-        baseurl       => lookup('profile_pgbackrest::yumrepo_url'),
+      yumrepo { 'yum_common_redhat':
+        descr         => 'yum_common_redhat',
+        baseurl       => lookup('profile_pgbackrest::yum_common_redhat_url'),
+        gpgcheck      => true,
+        gpgkey        => lookup('profile_pgbackrest::yumrepo_gpgkey'),
+        repo_gpgcheck => true,
+      }
+
+      yum_repo { 'yum_15_redhat':
+        descr         => 'yum_15_redhat',
+        baseurl       => lookup('profile_pgbackrest::yum_15_redhat_url'),
         gpgcheck      => true,
         gpgkey        => lookup('profile_pgbackrest::yumrepo_gpgkey'),
         repo_gpgcheck => true,

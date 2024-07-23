@@ -3,8 +3,10 @@
 profile_pgbackrest::postgresql_data: "/var/lib/pgsql/15/data"
 # The repository where pgBackrest stores backups and archives WAL segments
 profile_pgbackrest::backup_path: "/var/lib/pgbackrest"
-profile_pgbackrest::yumrepo_url: "https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-%{facts.os.distro.release.full}-%{facts.os.architecture}/"
-profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/RPM-GPG-KEY-PGDG-AARCH64-RHEL%{facts.os.distro.release.major}"
+profile_pgbackrest::yum_common_redhat_url: "https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-%{facts.os.distro.release.full}-%{facts.os.architecture}/"
+# profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/RPM-GPG-KEY-PGDG-AARCH64-RHEL%{facts.os.distro.release.major}"
+profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL"
+profile_pgbackrest::yum_15_redhat_url: "https://download.postgresql.org/pub/repos/yum/15/redhat/rhel-8.8-x86_64/"
 
 profile_pgbackrest::config::configs:
   demo:
