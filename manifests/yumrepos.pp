@@ -9,14 +9,6 @@ class profile_pgbackrest::yumrepos () {
         gpgkey        => lookup('profile_pgbackrest::yumrepo_gpgkey'),
         repo_gpgcheck => true,
       }
-
-      # yum_repo { 'yum_15_redhat':
-      #   descr         => 'yum_15_redhat',
-      #   baseurl       => lookup('profile_pgbackrest::yum_15_redhat_url'),
-      #   gpgcheck      => true,
-      #   gpgkey        => lookup('profile_pgbackrest::yumrepo_gpgkey'),
-      #   repo_gpgcheck => true,
-      # }
     }
   }
 }
