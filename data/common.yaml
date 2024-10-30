@@ -7,13 +7,6 @@ profile_pgbackrest::yum_common_redhat_url: "https://download.postgresql.org/pub/
 profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL"
 profile_pgbackrest::yum_15_redhat_url: "https://download.postgresql.org/pub/repos/yum/15/redhat/rhel-8.8-x86_64/"
 
-profile_pgbackrest::config::configs:
-  demo:
-    pg1-path: "/var/lib/pgsql/data"
-  global:
-    repo1-path: "/var/lib/pgbackrest"
-    repo1-retention-full: 2
-
 # profile_pgbackrest::postgresql_config:
 #   archive_command: "pgbackrest --stanza=demo archive-push %p"
 #   archive_mode: on
