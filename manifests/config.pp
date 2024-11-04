@@ -16,7 +16,7 @@ class profile_pgbackrest::config (
     ensure  => 'directory',
     owner   => 'postgres',
     group   => 'postgres',
-    mode    => '0770'
+    mode    => '0770',
     #require => File['/etc/pgbackrest']
   }
 
@@ -26,17 +26,17 @@ class profile_pgbackrest::config (
 
   file { '/etc/pgbackrest/conf.d'
     ensure  => directory,
-    require => File['/etc/pgbackrest']
+    require => File['/etc/pgbackrest'],
   }
 
   file { '/etc/pgbackrest/conf.d'
     ensure  => directory,
-    require => File['/etc/pgbackrest']
+    require => File['/etc/pgbackrest'],
   }
 
   file { $config_filepath:
     ensure  => file,
-    content => epp('profile_pgbackrest/pgbackrest_config.epp', {'configs' => $stanzas}),
+    content => epp('profile_pgbackrest/pgbackrest_config.epp', {'configs' => $stanza}),
     owner   => 'postgres',
     group   => 'postgres',
     mode    => '0640',
