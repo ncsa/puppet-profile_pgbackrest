@@ -52,7 +52,6 @@ class profile_pgbackrest::config (
   exec { "pgbackrest create stanza":
     command => "pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create", 
     user    => postgres,
-    onlyif  => ["[ -s ${confi_filepath} ]"],
   } 
 
   $cron_jobs.each |$type, $properties| {
