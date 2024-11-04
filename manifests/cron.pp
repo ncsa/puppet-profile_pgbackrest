@@ -1,9 +1,9 @@
 define profile_pgbackrest::cron (
-  Enum['full','diff','incr']        $backup_type   = 'incr', 
-  Optional[Integer[1,12]]           $cron_hour     = undef,
-  Optional[Integer[1,59]]           $cron_minute   = undef,
-  Optional[Integer[1,12],String[1]] $cron_month    = undef,
-  Optional[Integer[1,31]]           $cron_monthday = undef,
+  Enum['full','diff','incr']                 $backup_type   = 'incr', 
+  Optional[Integer[1,12]]                    $cron_hour     = undef,
+  Optional[Integer[1,59]]                    $cron_minute   = undef,
+  Optional[Variant[Integer[1,12],String[1]]] $cron_month    = undef,
+  Optional[Integer[1,31]]                    $cron_monthday = undef,
 ) {
   cron { "pgbackrest backup cron":
     ensure    => $cron_ensure,
