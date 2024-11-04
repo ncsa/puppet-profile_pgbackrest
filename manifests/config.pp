@@ -1,6 +1,6 @@
 class profile_pgbackrest::config (
   String                        $config_filepath   = '/etc/pgbackrest.conf',
-  Boolean                       $manage_cron       = false,
+  Optional[Hash]                $cron_jobs         = undef,
   Enum['present','absent']      $pgbackrest_ensure = 'present',
   Optional[Hash]                $stanza            = undef,
   String[1]                     $stanza_name       = '',
