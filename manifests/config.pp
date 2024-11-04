@@ -12,24 +12,24 @@ class profile_pgbackrest::config (
     ensure => $pgbackrest_ensure, 
   }
  
-  file { '/var/log/pgbackrest'
-    ensure  => 'directory',
+  file { '/var/log/pgbackrest':
+    ensure  => directory,
     owner   => 'postgres',
     group   => 'postgres',
     mode    => '0770',
     #require => File['/etc/pgbackrest']
   }
 
-  file { '/etc/pgbackrest'
+  file { '/etc/pgbackrest':
     ensure  => directory,
   }
 
-  file { '/etc/pgbackrest/conf.d'
+  file { '/etc/pgbackrest/conf.d':
     ensure  => directory,
     require => File['/etc/pgbackrest'],
   }
 
-  file { '/etc/pgbackrest/conf.d'
+  file { '/etc/pgbackrest/conf.d':
     ensure  => directory,
     require => File['/etc/pgbackrest'],
   }
@@ -51,7 +51,7 @@ class profile_pgbackrest::config (
       mode   => '0750',
     }
   }
-#  exec { "pgbackrest create stanza" 
+#  exec { "pgbackrest create stanza":
 #    command => "pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create", 
 #    user    => postgres,
 #    onlyif  => ["[ -s ${confi_filepath} ]"],
