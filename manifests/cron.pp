@@ -5,7 +5,7 @@ define profile_pgbackrest::cron (
   Optional[Variant[Integer[1,12],String[1]]] $cron_month    = undef,
   Optional[Integer[1,31]]                    $cron_monthday = undef,
 ) {
-  cron { "pgbackrest backup cron":
+  cron { "pgbackrest backup cron - ${backup_type}":
     ensure    => $cron_ensure,
     command   => "pgbackrest --stanza=${backup_type} --log-level-console=info backup",
     user      => postgres, 
