@@ -35,7 +35,6 @@ class profile_pgbackrest::config (
     owner   => 'postgres',
     group   => 'postgres',
     mode    => '0640',
-    require => File['/etc/pgbackrest'],
   }
 
 #  $repositories.each |$repository| {
