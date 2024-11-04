@@ -5,20 +5,23 @@ class profile_pgbackrest::config (
   Optional[Hash]                $stanza            = undef,
   String[1]                     $stanza_name       = '',
   Array[String[1]]              $repositories      = ['/var/lib/pgbackrest'],
-  Enum['postgres','pgbackrest'] $repository_owner  = 'postgres',
+  String                        $user              = 'postgres',
+  String                        $group             = 'postgres',
+  String                        $conf_mode         = '0664',
+  String                        $var_lib_mode      = '0700',
+  String                        $var_log_mode      = '0700',
 ) {
 
   package { 'pgbackrest': 
     ensure => $pgbackrest_ensure, 
   }
  
-#  file { '/var/log/pgbackrest':
-#    ensure  => directory,
-#    owner   => 'postgres',
-#    group   => 'postgres',
-#    mode    => '0770',
-#    #require => File['/etc/pgbackrest']
-#  }
+  file { '/var/log/pgbackrest':
+    ensure  => directory,
+    owner   => $user,
+    group   => $group,
+    mode    => $var_log_mode,
+  }
 
 #  file { '/etc/pgbackrest':
 #    ensure  => directory,
@@ -32,19 +35,19 @@ class profile_pgbackrest::config (
   file { $config_filepath:
     ensure  => file,
     content => epp('profile_pgbackrest/pgbackrest_config.epp', {'configs' => $stanza}),
-    owner   => 'postgres',
-    group   => 'postgres',
-    mode    => '0640',
+    owner   => $user,
+    group   => $group,
+    mode    => $conf_mode,
   }
 
-#  $repositories.each |$repository| {
-#    file { $repository:
-#      ensure => directory,
-#      owner  => $repository_owner,
-#      group  => $repository_owner,
-#      mode   => '0750',
-#    }
-#  }
+  $repositories.each |$repository| {
+    file { $repository:
+      ensure => directory,
+      owner  => $user,
+      group  => $group,
+      mode   => $var_log_mode,
+    }
+  }
 #  exec { "pgbackrest create stanza":
 #    command => "pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create", 
 #    user    => postgres,
