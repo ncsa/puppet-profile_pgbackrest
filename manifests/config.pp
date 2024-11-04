@@ -7,7 +7,7 @@ class profile_pgbackrest::config (
   Array[String[1]]              $repositories      = ['/var/lib/pgbackrest'],
   String                        $user              = 'postgres',
   String                        $group             = 'postgres',
-  String                        $conf_mode         = '0664',
+  String                        $conf_mode         = '0644',
   String                        $var_lib_mode      = '0700',
   String                        $var_log_mode      = '0700',
 ) {
