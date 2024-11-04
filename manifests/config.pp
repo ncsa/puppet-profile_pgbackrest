@@ -3,9 +3,9 @@ class profile_pgbackrest::config (
   Boolean                       $manage_cron       = false,
   Enum['present','absent']      $pgbackrest_ensure = 'present',
   Optional[Hash]                $stanza            = undef,
-  String[1]                     $stanza_name       = ''
+  String[1]                     $stanza_name       = '',
   Array[String[1]]              $repositories      = ['/var/lib/pgbackrest'],
-  Enum['postgres','pgbackrest'] $repository_owner  = 'postgres'
+  Enum['postgres','pgbackrest'] $repository_owner  = 'postgres',
 ) {
 
   package { 'pgbackrest': 
