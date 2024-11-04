@@ -54,7 +54,7 @@ class profile_pgbackrest::config (
 #    onlyif  => ["[ -s ${confi_filepath} ]"],
 #  } 
 
-#  $cron_jobs.each |$type, $properties| {
-#    profile_pgbackrest::cron { $type: * => $properties }
-#  }
+  $cron_jobs.each |$type, $properties| {
+    profile_pgbackrest::cron { $type: * => $properties }
+  }
 }
