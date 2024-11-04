@@ -27,12 +27,7 @@ class profile_pgbackrest::config (
   file { '/etc/pgbackrest/conf.d':
     ensure  => directory,
     require => File['/etc/pgbackrest'],
-  }
-
-  file { '/etc/pgbackrest/conf.d':
-    ensure  => directory,
-    require => File['/etc/pgbackrest'],
-  }
+  } 
 
   file { $config_filepath:
     ensure  => file,
