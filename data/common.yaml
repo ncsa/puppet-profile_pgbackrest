@@ -6,5 +6,5 @@ profile_pgbackrest::repo_gpgkey: "https://download.postgresql.org/pub/repos/yum/
 
 ################# profile_backup #################
 profile_pgbackrest::backup::paths:
-  - '/var/lib/pgbackrest'
-  - '/etc/pgbackrest.conf'
+  - "/var/lib/pgbackrest"
+  - "/etc/pgbackrest.conf"
