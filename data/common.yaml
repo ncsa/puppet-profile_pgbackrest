@@ -1,4 +1,10 @@
 ---
-profile_pgbackrest::yum_common_redhat_url: "https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-%{facts.os.distro.release.full}-%{facts.os.architecture}/"
-profile_pgbackrest::yumrepo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL"
-profile_pgbackrest::yum_15_redhat_url: "https://download.postgresql.org/pub/repos/yum/15/redhat/rhel-8.8-x86_64/"
+
+################# PostgreSQL Yum Repository #################
+profile_pgbackrest::repo_baseurl: "https://download.postgresql.org/pub/repos/yum/common/redhat/rhel-%{facts.os.distro.release.full}-%{facts.os.architecture}/"
+profile_pgbackrest::repo_gpgkey: "https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL"
+
+################# profile_backup #################
+profile_pgbackrest::backup::paths:
+  - '/var/lib/pgbackrest'
+  - '/etc/pgbackrest.conf'
