@@ -57,8 +57,8 @@ class profile_pgbackrest::config (
     mode    => $conf_mode,
   }
 
-  # Only supporting 1 repository
-  # Creates a custom repository and stanza
+  # Creates custom repositories
+  # if none is given, the default is /var/lib/pgbackrest
   $repositories.each |$repository| {
     file { $repository:
       ensure => directory,
@@ -66,21 +66,18 @@ class profile_pgbackrest::config (
       group  => $group,
       mode   => $repo_mode,
     }
-
-    exec { "create stanza ${stanza_name}":
-      command => "/bin/pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create",
-      user    => $user,
-      creates => "${repository}/backup/${stanza_name}/backup.info",
-    }
   }
 
-  # If no custom repository ir provided, create stanza using the default location (/var/lib/pgbackrest)
   if $repositories.empty {
-    exec { "create stanza ${stanza_name}":
-      command => "/bin/pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create",
-      user    => $user,
-      creates => "/var/lib/pgbackrest/backup/${stanza_name}/backup.info",
-    }
+    $check_path = "/var/lib/pgbackrest/backup/${stanza_name}/backup.info"
+  } else {
+    $check_path = "${repositories[0]}/backup/${stanza_name}/backup.info"
+  }
+
+  exec { "create stanza ${stanza_name}":
+    command => "/bin/pgbackrest --stanza=${stanza_name} --log-level-console=info stanza-create",
+    user    => $user,
+    creates => $check_path,
   }
 
   # Configures cron jobs
